@@ -1,0 +1,49 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;700;900&display=swap');
+@import "tailwindcss";
+
+@theme {
+  /* Tus colores personalizados */
+  --color-surface-0: #000000;
+  --color-surface-100: #0A0A0A;
+  --color-surface-200: #141414;
+  --color-surface-300: #1F1F1F;
+  --color-surface-border: #27272A;
+
+  --color-gold-base: #E0C68F;
+  --color-gold-hover: #C2AA79;
+  --color-gold-active: #A38E5A;
+  --color-danger-rec: #FF2A2A;
+/* NUEVOS COLORES NEÓN (DAW Style) */
+  --color-neon-green: #23FA9D;
+  --color-neon-pink: #FF497A;
+  --color-neon-purple: #7B4DA2;
+  /* Tu tipografía */
+  --font-rubik: 'Rubik', sans-serif;
+
+  /* Efectos 3D de hardware */
+  --shadow-hardware-btn: inset 0 1px 1px rgba(255,255,255,0.1), 0 4px 6px rgba(0,0,0,0.6);
+  --shadow-hardware-pressed: inset 0 3px 5px rgba(0,0,0,0.8), 0 1px 2px rgba(0,0,0,0.4);
+}
+
+/* Configuramos el fondo de tu página */
+@layer base {
+  body {
+    background-color: var(--color-surface-0);
+    color: white;
+    font-family: var(--font-rubik);
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection {
+    background-color: rgba(224, 198, 143, 0.3); /* Tu dorado en transparencia */
+  }
+}
+
+/* Animación para el carrusel de artistas */
+@keyframes marquee {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-marquee {
+  animation: marquee 25s linear infinite;
+}
