@@ -1,44 +1,56 @@
 <script>
-  // ESTÁNDAR SVELTE 5
-  let { 
-    value = $bindable(50), 
-    min = 0, 
-    max = 100, 
-    size = 64, 
-    label = "KNOB" 
-  } = $props();
+  // Añadimos 'label' para que no rompa si se lo pasas desde +page.svelte
+  let { value = $bindable(50), min = 0, max = 100, size = 120, label = "" } = $props();
 
-  // $derived calcula automáticamente la rotación cuando cambia el 'value'
-  let percentage = $derived((value - min) / (max - min));
-  let rotation = $derived(-135 + (percentage * 270));
+  let uid = $state(Math.random().toString(36).substr(2, 9));
+
+  let percentage = $derived(Math.max(0, Math.min(1, (value - min) / (max - min))));
+  let rotation = $derived(-135 + percentage * 270);
+  let litLength = $derived(percentage * 188.5); 
+
+  let indicatorColor = $derived(
+    percentage >= 0.85 ? '#ff3b30' : 
+    percentage >= 0.60 ? '#ffcc00' : 
+    '#34c759'                        
+  );
 </script>
 
-<div class="relative inline-flex flex-col items-center group" style="width: {size}px;">
-  <div class="relative flex items-center justify-center">
-    
-    <svg width={size} height={size} viewBox="0 0 64 64" class="pointer-events-none transition-transform duration-75">
-      <circle cx="32" cy="32" r="28" fill="#0a0a0a" stroke="#27272a" stroke-width="2" class="group-hover:stroke-[#E0C68F] transition-colors"/>
-      <circle cx="32" cy="32" r="22" fill="#1f1f1f" stroke="#111" stroke-width="1"/>
-      
-      <g transform="rotate({rotation} 32 32)">
-        <line x1="32" y1="32" x2="32" y2="12" stroke="#E0C68F" stroke-width="4" stroke-linecap="round" 
-              class="drop-shadow-[0_0_4px_rgba(224,198,143,0.5)]"/>
-      </g>
-      
-      <circle cx="12" cy="52" r="2" fill="#555"/>
-      <circle cx="52" cy="52" r="2" fill="#555"/>
-    </svg>
+<div class="relative flex flex-col items-center justify-center group" style="width: {size}px; height: {size}px;">
+  
+  <svg class="absolute inset-0 w-full h-full transform rotate-[135deg]" viewBox="0 0 100 100">
+    <defs>
+      <linearGradient id="ledGradient_{uid}" x1="0" y1="50" x2="100" y2="50" gradientUnits="userSpaceOnUse" gradientTransform="rotate(-135 50 50)">
+        <stop offset="0%" stop-color="#34c759" />
+        <stop offset="50%" stop-color="#ffcc00" />
+        <stop offset="100%" stop-color="#ff3b30" />
+      </linearGradient>
 
-    <input
-      type="range"
-      {min} {max}
-      bind:value
-      class="absolute inset-0 w-full h-full opacity-0 cursor-pointer m-0 z-10"
-      title="Ajustar {label}"
-    />
+      <mask id="trackMask_{uid}">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="10" stroke-dasharray="188.5 260" stroke-linecap="round" />
+      </mask>
+
+      <mask id="progressMask_{uid}">
+        <circle cx="50" cy="50" r="40" fill="none" stroke="white" stroke-width="10" stroke-dasharray="{litLength} 260" stroke-linecap="round" />
+      </mask>
+
+      <filter id="ledGlow_{uid}" x="-20%" y="-20%" width="140%" height="140%">
+        <feGaussianBlur stdDeviation="2" result="blur" />
+        <feMerge>
+          <feMergeNode in="blur" />
+          <feMergeNode in="SourceGraphic" />
+        </feMerge>
+      </filter>
+    </defs>
+
+    <circle cx="50" cy="50" r="40" fill="none" stroke="#1a1a1a" stroke-width="3" stroke-dasharray="2 4" stroke-linecap="round" mask="url(#trackMask_{uid})" />
+    <circle cx="50" cy="50" r="40" fill="none" stroke="url(#ledGradient_{uid})" stroke-width="3" stroke-dasharray="2 4" stroke-linecap="round" mask="url(#progressMask_{uid})" filter="url(#ledGlow_{uid})" />
+  </svg>
+
+  <div class="absolute w-[66%] h-[66%] rounded-full bg-gradient-to-br from-[#2a2a2a] to-[#050505] shadow-[0_10px_20px_rgba(0,0,0,0.9),inset_0_2px_2px_rgba(255,255,255,0.05)] border border-[#111] p-[2px]">
+    <div class="w-full h-full rounded-full bg-gradient-to-b from-[#1a1a1a] to-[#111] shadow-[inset_0_-2px_5px_rgba(0,0,0,0.8),inset_0_2px_3px_rgba(255,255,255,0.05)] relative" style="transform: rotate({rotation}deg);">
+      <div class="absolute top-[12%] left-1/2 -translate-x-1/2 w-[6px] h-[6px] rounded-full" style="background-color: {indicatorColor}; box-shadow: 0 0 8px {indicatorColor}; transition: background-color 0.3s ease, box-shadow 0.3s ease;"></div>
+    </div>
   </div>
 
-  <span class="mt-2 text-[0.75rem] font-bold tracking-widest text-surface-border uppercase font-rubik group-hover:text-gold-base transition-colors">
-    {label}
-  </span>
+  <input type="range" {min} {max} bind:value class="absolute inset-0 w-full h-full opacity-0 cursor-ns-resize z-20 m-0 touch-none" />
 </div>

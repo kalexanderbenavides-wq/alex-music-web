@@ -58,22 +58,11 @@
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-neon-purple opacity-30 blur-[100px] rounded-full pointer-events-none z-0"></div>
 </div>
 
-<!-- SECCIÓN DE BEATS / CATÁLOGO (DINÁMICA) -->
-<div id="beats" class="relative w-full flex justify-center mt-20 px-4">
+<div id="beats" class="relative w-full flex justify-center mt-20 mb-28 px-4">
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-neon-purple opacity-30 blur-[100px] rounded-full pointer-events-none z-0"></div>
   
   <div class="relative z-10 w-full max-w-[1100px]">
-    {#if cargando}
-      <div class="w-full p-8 border border-surface-border bg-surface-100 rounded-2xl flex justify-center items-center">
-        <span class="text-neon-green font-mono text-sm uppercase tracking-widest animate-pulse">Conectando a Supabase...</span>
-      </div>
-    {:else if pistas.length === 0}
-      <div class="w-full p-8 border border-surface-border bg-surface-100 rounded-2xl text-center">
-        <p class="text-surface-border font-medium">Aún no hay pistas en el catálogo.</p>
-      </div>
-    {:else}
-      <BeatPlayer tracks={pistas} />
-    {/if}
+    <BeatPlayer />
   </div>
 </div>
 

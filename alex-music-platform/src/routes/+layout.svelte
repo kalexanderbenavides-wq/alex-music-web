@@ -1,43 +1,84 @@
 <script>
-  // Importamos los estilos globales para que Tailwind funcione en toda la app
   import './layout.css';
-  
-  // Svelte 5: Así recibimos el contenido de las otras páginas
   let { children } = $props();
+  
+  import AnalogKnob from '$lib/components/AnalogKnob.svelte';
+  import MiniPlayer from '$lib/components/MiniPlayer.svelte';
+  import { supabase } from '$lib/supabase';
+  
+  import {
+    masterVolume, globalTracks, activeIndex, isPlaying, 
+    currentTime, duration, activeTrack
+  } from '$lib/stores/playerStore.js';
+
+  let audioElement = $state();
+  let cargando = $state(true);
+
+  // Descarga el catálogo globalmente
+  $effect(() => {
+    async function cargarCatalogo() {
+      const { data, error } = await supabase
+        .from('pistas')
+        .select('*')
+        .order('created_at', { ascending: false });
+        
+      if (!error && data) globalTracks.set(data);
+      cargando = false;
+    }
+    cargarCatalogo();
+  });
+
+  // El puente entre los stores lógicos y el hardware de audio real
+  $effect(() => {
+    if (audioElement) {
+      audioElement.volume = $masterVolume / 100;
+      
+      if ($isPlaying && audioElement.paused) {
+        setTimeout(() => audioElement.play().catch(e => console.log(e)), 50);
+      } else if (!$isPlaying && !audioElement.paused) {
+        audioElement.pause();
+      }
+    }
+  });
+
+  function updateTime() { if (audioElement) currentTime.set(audioElement.currentTime); }
+  function updateMetadata() { if (audioElement) duration.set(audioElement.duration); }
+  function handleEnd() {
+    if ($activeIndex < $globalTracks.length - 1) {
+      activeIndex.update(n => n + 1);
+      isPlaying.set(true);
+    } else {
+      isPlaying.set(false);
+    }
+  }
 </script>
 
-<!-- HEADER GLOBAL (Estilo MWTM: Sutil y Elegante) -->
 <header class="w-full p-8 absolute top-0 left-0 z-50 flex justify-between items-center">
-  
-  <!-- Logo Izquierda -->
-  <a href="/" class="flex items-center gap-3 group">
-    <div class="w-8 h-8 rounded-full border-2 border-surface-border relative bg-surface-200 group-hover:border-neon-green transition-colors">
-      <div class="absolute top-1 left-1/2 -translate-x-1/2 w-[2px] h-[10px] bg-neon-green rounded-full shadow-[0_0_8px_#23FA9D]"></div>
+  <div class="flex items-center gap-3 group">
+    <div class="pointer-events-auto">
+      <AnalogKnob bind:value={$masterVolume} size={44} />
     </div>
-    <span class="font-rubik font-bold text-xl text-white tracking-widest">AB.</span>
-  </a>
-
-  <!-- Navegación limpia y sutil flotando sobre el fondo -->
+    <a href="/" class="font-rubik text-2xl font-black text-white tracking-widest hover:text-white/80 transition-colors cursor-pointer">
+      AB.
+    </a>
+  </div>
   <div class="hidden md:flex gap-10 items-center pr-4">
     <a href="/#servicios" class="text-[0.95rem] font-medium text-white/70 hover:text-white transition-colors">Servicios</a>
     <a href="/#beats" class="text-[0.95rem] font-medium text-white/70 hover:text-white transition-colors">Beats</a>
     <a href="/bio" class="text-[0.95rem] font-medium text-white/70 hover:text-white transition-colors">Sobre Mí</a>
-    
-    <!-- Botón de Contacto (Estilo Register de MWTM) -->
     <a href="/contacto" class="text-[0.9rem] font-medium text-gold-base border border-gold-base/50 rounded-lg px-6 py-2 hover:bg-gold-base/10 transition-colors ml-2">
       Contacto
     </a>
   </div>
-
 </header>
 
-<!-- AQUÍ SE INYECTA EL CONTENIDO DE CADA PÁGINA INDIVIDUAL -->
-<main>
+<!-- Paginación -->
+<main class="pb-[40px]">
   {@render children()}
 </main>
 
-<!-- FOOTER GLOBAL (Estilo Voger / Dark Studio) -->
-<footer class="bg-surface-100 rounded-tl-[100px] pt-24 pb-8 px-8 mt-20 border-t border-l border-surface-border">
+<!-- FOOTER GLOBAL RESTAURADO -->
+<footer class="bg-surface-100 rounded-tl-[100px] pt-24 pb-[120px] px-8 mt-20 border-t border-l border-surface-border">
   <div class="max-w-[1200px] mx-auto">
     
     <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 mb-20">
@@ -100,3 +141,18 @@
     </div>
   </div>
 </footer>
+
+<!-- EL MOTOR FÍSICO DE AUDIO -->
+<audio
+  bind:this={audioElement}
+  src={$activeTrack?.audio_url}
+  ontimeupdate={updateTime}
+  onloadedmetadata={updateMetadata}
+  onended={handleEnd}
+  preload="metadata"
+></audio>
+
+<!-- LA BARRA INFERIOR (Solo aparece si el catálogo cargó) -->
+{#if !cargando && $globalTracks.length > 0}
+  <MiniPlayer />
+{/if}
