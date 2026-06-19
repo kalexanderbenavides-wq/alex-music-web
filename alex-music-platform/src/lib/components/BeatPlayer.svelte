@@ -110,7 +110,7 @@
     <Fader bind:value={$masterVolume} height={180} />
     <div class="flex flex-col items-center mt-3">
       <span class="text-[0.6rem] text-surface-border font-bold uppercase tracking-widest">VOL</span>
-      <span class="text-[0.75rem] text-white font-mono font-bold mt-0.5">{Math.round($masterVolume)}</span>
+      
     </div>
   </div>
 </div>
