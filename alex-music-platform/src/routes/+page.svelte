@@ -5,6 +5,8 @@
   import Fader from '$lib/components/Fader.svelte';
   import BeatPlayer from '$lib/components/BeatPlayer.svelte';
   import { supabase } from '$lib/supabase';
+  import Skeleton from '$lib/components/Skeleton.svelte';
+import { globalTracks } from '$lib/stores/playerStore.js';
   
   // 2. Variables de estado para Supabase
   let pistas = $state([]);
@@ -54,15 +56,17 @@
 </section>
 
 <!-- LUZ DE FONDO SEPARADORA -->
-<div class="relative w-full flex justify-center mt-20">
-  <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-neon-purple opacity-30 blur-[100px] rounded-full pointer-events-none z-0"></div>
-</div>
-
+<!-- SECCIÓN BEATS / CATÁLOGO -->
 <div id="beats" class="relative w-full flex justify-center mt-20 mb-28 px-4">
   <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[1000px] h-[600px] bg-neon-purple opacity-30 blur-[100px] rounded-full pointer-events-none z-0"></div>
   
   <div class="relative z-10 w-full max-w-[1100px]">
-    <BeatPlayer />
+    <!-- Lógica de carga visual -->
+    {#if $globalTracks.length === 0}
+      <Skeleton />
+    {:else}
+      <BeatPlayer />
+    {/if}
   </div>
 </div>
 

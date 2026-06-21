@@ -28,16 +28,35 @@
     cargarCatalogo();
   });
 
-  // El puente entre los stores lógicos y el hardware de audio real
+ // CANAL 1: Cambio de Pista (Track Switch)
+  // Cada vez que cambia la canción, reiniciamos el buffer del navegador
+  $effect(() => {
+    const trackUrl = $activeTrack?.audio_url;
+    if (audioElement && trackUrl) {
+      audioElement.load(); // Fuerza al navegador a descargar el nuevo MP3
+      if ($isPlaying) {
+        audioElement.play().catch(e => console.log("Esperando interacción...", e));
+      }
+    }
+  });
+
+  // CANAL 2: Control de Transporte (Play / Pause)
+  // Controla el estado físico del reproductor sin reiniciar la canción
+  $effect(() => {
+    const playing = $isPlaying;
+    if (audioElement && $activeTrack?.audio_url) {
+      if (playing && audioElement.paused) {
+        audioElement.play().catch(e => console.log("Error al reproducir:", e));
+      } else if (!playing && !audioElement.paused) {
+        audioElement.pause();
+      }
+    }
+  });
+
+  // CANAL 3: Ganancia (Master Volume)
   $effect(() => {
     if (audioElement) {
       audioElement.volume = $masterVolume / 100;
-      
-      if ($isPlaying && audioElement.paused) {
-        setTimeout(() => audioElement.play().catch(e => console.log(e)), 50);
-      } else if (!$isPlaying && !audioElement.paused) {
-        audioElement.pause();
-      }
     }
   });
 
