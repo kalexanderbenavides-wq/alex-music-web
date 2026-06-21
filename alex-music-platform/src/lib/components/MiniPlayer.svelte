@@ -46,29 +46,30 @@
 
   <div class="flex flex-col items-center justify-center flex-1 max-w-[500px]">
     <div class="flex items-center gap-6 mb-1">
-      <button onclick={prevTrack} class="text-[#555] hover:text-white transition-colors cursor-pointer">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg>
+      <button aria-label="Pista anterior" onclick={prevTrack} class="text-[#555] hover:text-white transition-colors cursor-pointer focus:outline-none focus:text-white">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg>
       </button>
       
       <button 
+        aria-label={$isPlaying ? 'Pausar' : 'Reproducir'}
         onclick={togglePlay} 
-        class="w-14 h-14 flex items-center justify-center rounded-full border-2 border-neon-green text-neon-green hover:bg-neon-green/10 transition-colors shadow-[0_0_15px_rgba(35,250,157,0.2)] cursor-pointer"
+        class="w-14 h-14 flex items-center justify-center rounded-full border-2 border-neon-green text-neon-green hover:bg-neon-green/10 transition-colors shadow-[0_0_15px_rgba(35,250,157,0.2)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-neon-green focus:ring-offset-2 focus:ring-offset-[#050505]"
       >
         {#if $isPlaying}
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
         {:else}
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+          <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
         {/if}
       </button>
       
-      <button onclick={nextTrack} class="text-[#555] hover:text-white transition-colors cursor-pointer">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"></path></svg>
+      <button aria-label="Pista siguiente" onclick={nextTrack} class="text-[#555] hover:text-white transition-colors cursor-pointer focus:outline-none focus:text-white">
+        <svg aria-hidden="true" width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"></path></svg>
       </button>
     </div>
     
     <div class="flex items-center gap-3 w-full">
       <span class="text-[0.65rem] text-[#555] font-mono w-8 text-right">{formatTime($currentTime)}</span>
-      <div class="relative flex-1 h-1 bg-[#1a1a1a] rounded-full overflow-hidden cursor-pointer">
+      <div class="relative flex-1 h-1 bg-[#1a1a1a] rounded-full overflow-hidden cursor-pointer" role="progressbar" aria-valuenow={$currentTime} aria-valuemin="0" aria-valuemax={$duration}>
         <div class="absolute top-0 left-0 h-full bg-white transition-all duration-100" style="width: {($currentTime / $duration) * 100 || 0}%"></div>
       </div>
       <span class="text-[0.65rem] text-[#555] font-mono w-8">{formatTime($duration)}</span>
@@ -76,7 +77,7 @@
   </div>
 
   <div class="flex items-center justify-end gap-3 w-1/4 min-w-[150px] pr-4">
-    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[#555]"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
-    <AnalogKnob bind:value={$masterVolume} size={36} />
+    <svg aria-hidden="true" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-[#555]"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"></polygon><path d="M19.07 4.93a10 10 0 0 1 0 14.14M15.54 8.46a5 5 0 0 1 0 7.07"></path></svg>
+    <AnalogKnob bind:value={$masterVolume} size={36} label="Volumen maestro" />
   </div>
 </div>

@@ -53,5 +53,11 @@
     </div>
   </div>
 
-  <input type="range" {min} {max} bind:value class="absolute inset-0 w-full h-full opacity-0 cursor-ns-resize z-20 m-0 touch-none" />
+  <input 
+    type="range" 
+    {min} {max} 
+    bind:value 
+    aria-label={label || 'Control de perilla'}
+    class="absolute inset-0 w-full h-full opacity-0 cursor-ns-resize z-20 m-0 touch-none focus:outline-none" 
+  />
 </div>

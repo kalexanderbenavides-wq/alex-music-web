@@ -62,19 +62,25 @@
         <span class="text-[0.75rem] text-surface-border font-mono w-10">{formatTime($duration)}</span>
       </div>
 
-      <div class="flex items-center gap-6 mt-6">
-        <button onclick={prevTrack} class="text-surface-border hover:text-white transition-colors cursor-pointer">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg>
+     <div class="flex items-center gap-6 mt-6">
+        <button aria-label="Pista anterior" onclick={prevTrack} class="text-surface-border hover:text-white transition-colors cursor-pointer focus:outline-none focus:text-white">
+          <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z"></path></svg>
         </button>
-        <button onclick={() => togglePlay($activeIndex)} class="w-14 h-14 flex items-center justify-center rounded-full border-2 border-neon-green text-neon-green hover:bg-neon-green/10 transition-colors shadow-[0_0_15px_rgba(35,250,157,0.2)] cursor-pointer">
+        
+        <button 
+          aria-label={$isPlaying ? 'Pausar' : 'Reproducir'}
+          onclick={() => togglePlay($activeIndex)} 
+          class="w-14 h-14 flex items-center justify-center rounded-full border-2 border-neon-green text-neon-green hover:bg-neon-green/10 transition-colors shadow-[0_0_15px_rgba(35,250,157,0.2)] cursor-pointer focus:outline-none focus:ring-2 focus:ring-neon-green"
+        >
           {#if $isPlaying}
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
           {:else}
-            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            <svg aria-hidden="true" width="20" height="20" viewBox="0 0 24 24" fill="currentColor" class="ml-1"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
           {/if}
         </button>
-        <button onclick={nextTrack} class="text-surface-border hover:text-white transition-colors cursor-pointer">
-          <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"></path></svg>
+        
+        <button aria-label="Pista siguiente" onclick={nextTrack} class="text-surface-border hover:text-white transition-colors cursor-pointer focus:outline-none focus:text-white">
+          <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"></path></svg>
         </button>
       </div>
     </div>
@@ -93,11 +99,14 @@
             <span class="px-3 py-1 rounded-full bg-neon-pink/10 border border-neon-pink/30 text-neon-pink text-[0.65rem] uppercase tracking-wider font-bold">
               {track.genero}
             </span>
-            <button class="w-8 h-8 flex items-center justify-center rounded-full border border-surface-border group-hover:border-white transition-colors text-surface-border group-hover:text-white">
+            <button 
+              aria-label={$activeIndex === i && $isPlaying ? 'Pausar ' + track.titulo : 'Reproducir ' + track.titulo}
+              class="w-8 h-8 flex items-center justify-center rounded-full border border-surface-border group-hover:border-white transition-colors text-surface-border group-hover:text-white focus:outline-none focus:border-white focus:text-white"
+            >
               {#if $activeIndex === i && $isPlaying}
-                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                 <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
               {:else}
-                 <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="ml-0.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                 <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="ml-0.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
               {/if}
             </button>
           </div>

@@ -104,10 +104,14 @@
       <!-- Columna 1: Marca y Bio -->
       <div class="lg:col-span-4">
         <div class="flex items-center gap-4 mb-6">
-          <div class="w-10 h-10 rounded-full border-[3px] border-surface-border relative bg-surface-200">
-            <div class="absolute top-1 left-1/2 -translate-x-1/2 w-[3px] h-[12px] bg-neon-green rounded-full shadow-[0_0_8px_#23FA9D]"></div>
+          
+          <div class="pointer-events-none opacity-90">
+            <AnalogKnob value={85} size={44} />
           </div>
-          <span class="font-rubik font-bold text-2xl text-white tracking-widest">AB.</span>
+          
+          <a href="/" class="font-rubik font-bold text-2xl text-white tracking-widest hover:text-white/80 transition-colors cursor-pointer">
+            AB.
+          </a>
         </div>
         <p class="text-surface-border text-[0.95rem] leading-[1.8] max-w-[350px]">
           Producción musical, mezcla y mastering. El puente entre tu mente y los monitores. Tu sonido, materializado con flujo de trabajo ágil en Ableton Live.
@@ -128,19 +132,18 @@
         <a href="/contacto" class="text-surface-border hover:text-white transition-colors text-[0.9rem] font-medium w-fit">Contacto</a>
       </div>
 
-      <!-- Columna 4: Redes -->
       <div class="lg:col-span-4 lg:flex lg:justify-end">
         <div>
           <h4 class="font-rubik font-bold text-white text-[0.75rem] uppercase tracking-[2px] mb-6 lg:text-right">Redes</h4>
           <div class="grid grid-cols-3 gap-3 w-max">
-            <a href="https://instagram.com" target="_blank" class="w-14 h-14 flex items-center justify-center border border-surface-border rounded-xl text-surface-border hover:text-neon-pink hover:border-neon-pink hover:bg-neon-pink/10 transition-all duration-300">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
+            <a aria-label="Visitar perfil de Instagram" href="https://instagram.com" target="_blank" class="w-14 h-14 flex items-center justify-center border border-surface-border rounded-xl text-surface-border hover:text-neon-pink hover:border-neon-pink hover:bg-neon-pink/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-neon-pink">
+              <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
             </a>
-            <a href="https://youtube.com" target="_blank" class="w-14 h-14 flex items-center justify-center border border-surface-border rounded-xl text-surface-border hover:text-danger-rec hover:border-danger-rec hover:bg-danger-rec/10 transition-all duration-300">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
+            <a aria-label="Visitar canal de YouTube" href="https://youtube.com" target="_blank" class="w-14 h-14 flex items-center justify-center border border-surface-border rounded-xl text-surface-border hover:text-danger-rec hover:border-danger-rec hover:bg-danger-rec/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-danger-rec">
+              <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M22.54 6.42a2.78 2.78 0 0 0-1.94-2C18.88 4 12 4 12 4s-6.88 0-8.6.46a2.78 2.78 0 0 0-1.94 2A29 29 0 0 0 1 11.75a29 29 0 0 0 .46 5.33 2.78 2.78 0 0 0 1.94 2c1.72.46 8.6.46 8.6.46s6.88 0 8.6-.46a2.78 2.78 0 0 0 1.94-2 29 29 0 0 0 .46-5.33 29 29 0 0 0-.46-5.33z"></path><polygon points="9.75 15.02 15.5 11.75 9.75 8.48 9.75 15.02"></polygon></svg>
             </a>
-            <a href="https://tiktok.com" target="_blank" class="w-14 h-14 flex items-center justify-center border border-surface-border rounded-xl text-surface-border hover:text-neon-green hover:border-neon-green hover:bg-neon-green/10 transition-all duration-300">
-               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
+            <a aria-label="Visitar perfil de TikTok" href="https://tiktok.com" target="_blank" class="w-14 h-14 flex items-center justify-center border border-surface-border rounded-xl text-surface-border hover:text-neon-green hover:border-neon-green hover:bg-neon-green/10 transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-neon-green">
+               <svg aria-hidden="true" width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"></path></svg>
             </a>
           </div>
         </div>
