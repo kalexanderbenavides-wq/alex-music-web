@@ -5,7 +5,8 @@
     currentTime, duration, activeTrack, masterVolume
   } from '$lib/stores/playerStore.js';
 
-  function togglePlay(index) {
+  /** @param {number} index */
+function togglePlay(index) {
     if ($globalTracks.length === 0) return;
 
     if (index === $activeIndex) {
@@ -30,7 +31,8 @@
     }
   }
 
-  function formatTime(seconds) {
+  /** @param {number} seconds */
+function formatTime(seconds) {
     if (isNaN(seconds)) return "0:00";
     const m = Math.floor(seconds / 60);
     const s = Math.floor(seconds % 60);
@@ -40,8 +42,14 @@
 
 <div class="bg-surface-100 rounded-[24px] border border-surface-border p-6 md:p-8 flex flex-col md:flex-row gap-8 w-full shadow-[0_20px_50px_rgba(0,0,0,0.5)] relative overflow-hidden">
   
-  <div class="w-full md:w-[260px] aspect-square flex-shrink-0 rounded-[16px] overflow-hidden shadow-lg border border-surface-border/50 bg-surface-200">
-    <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=500&auto=format&fit=crop" class="w-full h-full object-cover" alt="Cover Art">
+  <div class="w-full md:w-[260px] aspect-square flex-shrink-0 rounded-[16px] overflow-hidden border border-surface-border/30 bg-[#111] relative group/cover">
+    <img 
+      src={$activeTrack?.portada_url || 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=800&auto=format&fit=crop'} 
+      alt="Portada de {$activeTrack?.titulo || 'AB. Session'}" 
+      class="w-full h-full object-cover transition-transform duration-700 group-hover/cover:scale-105"
+    />
+    
+    <div class="absolute inset-0 shadow-[inset_0_0_20px_rgba(0,0,0,0.6)] pointer-events-none"></div>
   </div>
 
   <div class="flex-1 flex flex-col justify-between">
@@ -87,30 +95,43 @@
 
     <div class="flex flex-col gap-2 border-t border-surface-border/50 pt-4 h-[180px] overflow-y-auto pr-2">
       {#each $globalTracks as track, i}
-        <div
-          class="flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer group {$activeIndex === i ? 'bg-surface-200/80 border-surface-border' : 'border-transparent hover:bg-surface-200/40'}"
+        
+        <div 
+          role="button" 
+          tabindex="0" 
+          onkeydown={(e) => (e.key === 'Enter' || e.key === ' ') && togglePlay(i)} 
+          class="flex items-center justify-between p-3 rounded-xl border transition-all cursor-pointer group {$activeIndex === i ? 'bg-surface-200/80 border-surface-border' : 'border-transparent hover:bg-surface-200/30'}" 
           onclick={() => togglePlay(i)}
         >
           <div class="flex items-center gap-4">
             <span class="text-surface-border text-xs font-mono w-4">{i + 1}</span>
-            <span class="text-white text-sm font-medium font-rubik tracking-wide">{track.titulo}</span>
+            <div class="flex flex-col">
+              <span class="font-rubik font-bold text-white group-hover:text-gold-base transition-colors">
+                {track.titulo}
+              </span>
+              <span class="text-[0.65rem] text-surface-border uppercase tracking-[2px] font-mono mt-1">
+                {track.artista || 'AB. SESSION'}
+              </span>
+            </div>
           </div>
+
           <div class="flex items-center gap-4">
             <span class="px-3 py-1 rounded-full bg-neon-pink/10 border border-neon-pink/30 text-neon-pink text-[0.65rem] uppercase tracking-wider font-bold">
-              {track.genero}
+              {track.genero || 'RAW'}
             </span>
             <button 
               aria-label={$activeIndex === i && $isPlaying ? 'Pausar ' + track.titulo : 'Reproducir ' + track.titulo}
-              class="w-8 h-8 flex items-center justify-center rounded-full border border-surface-border group-hover:border-white transition-colors text-surface-border group-hover:text-white focus:outline-none focus:border-white focus:text-white"
+              class="w-8 h-8 flex items-center justify-center rounded-full border border-surface-border group-hover:border-white transition-colors text-surface-border group-hover:text-white focus:outline-none focus:border-white focus:text-white pointer-events-none"
             >
               {#if $activeIndex === i && $isPlaying}
-                 <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
               {:else}
-                 <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="ml-0.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+                <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="currentColor" class="ml-0.5"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
               {/if}
             </button>
           </div>
         </div>
+
       {/each}
     </div>
   </div>

@@ -22,7 +22,7 @@
         .select('*')
         .order('created_at', { ascending: false });
         
-      if (!error && data) globalTracks.set(data);
+      if (!error && data) globalTracks.set(/** @type {any} */ (data));
       cargando = false;
     }
     cargarCatalogo();
@@ -35,7 +35,7 @@
     if (audioElement && trackUrl) {
       audioElement.load(); // Fuerza al navegador a descargar el nuevo MP3
       if ($isPlaying) {
-        audioElement.play().catch(e => console.log("Esperando interacción...", e));
+        audioElement.play().catch(() => console.log("Esperando interacción...", ));
       }
     }
   });
@@ -46,7 +46,7 @@
     const playing = $isPlaying;
     if (audioElement && $activeTrack?.audio_url) {
       if (playing && audioElement.paused) {
-        audioElement.play().catch(e => console.log("Error al reproducir:", e));
+        audioElement.play().catch(() => console.log("Error al reproducir:", ));
       } else if (!playing && !audioElement.paused) {
         audioElement.pause();
       }
@@ -156,10 +156,7 @@
       <p class="text-surface-border text-[0.8rem] font-rubik tracking-widest uppercase">
         Copyright &copy; 2024-2026 Alex Benavides.
       </p>
-      <div class="flex flex-wrap justify-center gap-8 text-[0.85rem] text-surface-border font-medium">
-        <a href="#" class="hover:text-white transition-colors">Privacidad</a>
-        <a href="#" class="hover:text-white transition-colors">Términos</a>
-      </div>
+      
     </div>
   </div>
 </footer>

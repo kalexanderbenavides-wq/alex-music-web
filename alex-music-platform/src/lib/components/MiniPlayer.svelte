@@ -24,7 +24,8 @@
     }
   }
 
-  function formatTime(seconds) {
+  /** @param {number} seconds */
+function formatTime(seconds) {
     if (isNaN(seconds)) return "0:00";
     const m = Math.floor(seconds / 60);
     const s = Math.floor(seconds % 60);
@@ -36,11 +37,24 @@
   
   <div class="flex items-center gap-4 w-1/4 min-w-[200px]">
     <div class="w-12 h-12 rounded-md overflow-hidden border border-[#2a2a2a] bg-[#111]">
-      <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=150&auto=format&fit=crop" class="w-full h-full object-cover" alt="Cover">
+      <img 
+        src={$activeTrack?.portada_url || 'https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=150&auto=format&fit=crop'} 
+        class="w-full h-full object-cover" 
+        alt="Portada del track"
+      >
     </div>
+    
     <div class="flex flex-col">
-      <span class="text-white font-rubik font-bold text-sm line-clamp-1">{$activeTrack.titulo || 'Selecciona una pista'}</span>
-      <span class="text-[#555] text-[0.65rem] uppercase tracking-widest font-mono">{$activeTrack.genero || '---'}</span>
+      <span class="text-white font-rubik font-bold text-sm line-clamp-1">
+        {$activeTrack?.titulo || 'Selecciona una pista'}
+      </span>
+      <span class="text-[#555] text-[0.65rem] uppercase tracking-widest font-mono">
+        {#if $activeTrack}
+          {$activeTrack.artista || 'AB. SESSION'} • {$activeTrack.genero || 'RAW'}
+        {:else}
+          ---
+        {/if}
+      </span>
     </div>
   </div>
 
