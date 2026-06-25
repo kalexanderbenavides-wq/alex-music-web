@@ -13,5 +13,5 @@
 >
   <div class="w-4 h-4 rounded-full border-2 border-[#550000] bg-danger-rec shadow-[0_0_10px_#ff0000,inset_0_0_5px_#ffffff] animate-pulse group-hover:shadow-[0_0_15px_#ff2a2a,0_0_30px_#ff0000,inset_0_0_5px_#ffffff] transition-shadow duration-300"></div>
   
-  <span class="mt-1">REC: {text}</span>
+  <span class="mt-1">{text}</span>
 </a>

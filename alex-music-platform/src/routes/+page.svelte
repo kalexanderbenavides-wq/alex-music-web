@@ -23,7 +23,7 @@
       console.log("Respuesta de la Base de Datos:", data);
       console.log("Posible Error Invisible:", error);
 
-      if (!error && data) globalTracks.set(/** @type {any} */ (data));
+      if (!error) pistas = data;
       cargando = false;
     }
     cargarCatalogo();
@@ -31,17 +31,30 @@
 </script>
 
 <section id="inicio" class="min-h-screen pt-[120px] pb-16 flex flex-col items-center justify-center text-center px-4 relative">
-  <div class="w-full max-w-[900px] aspect-video rounded-[20px] overflow-hidden relative mb-12 border border-surface-border shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-surface-100 cursor-pointer group transition-all duration-500 hover:-translate-y-2 hover:shadow-[0_30px_60px_rgba(224,198,143,0.25)] hover:border-gold-base focus-within:ring-2 focus-within:ring-gold-base">
-    <img 
-      src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=2070&auto=format&fit=crop" 
-      alt="Consola analógica en el Estudio de Grabación" 
-      class="w-full h-full object-cover brightness-[0.7] group-hover:brightness-[0.9] transition-all duration-500"
-    />
-    <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-surface-0/70 backdrop-blur-sm border-2 border-gold-base rounded-full flex items-center justify-center text-gold-base group-hover:bg-gold-base group-hover:text-surface-0 group-hover:scale-110 transition-all duration-300">
-      <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="ml-1">
-        <polygon points="5 3 19 12 5 21 5 3"></polygon>
-      </svg>
+  
+  <div class="w-full max-w-[900px] aspect-video rounded-[20px] overflow-hidden relative mb-12 border border-surface-border shadow-[0_20px_50px_rgba(0,0,0,0.5)] bg-surface-100 group/lock focus-within:ring-2 focus-within:ring-gold-base">
+    
+    <div class="pointer-events-none opacity-20 blur-[2px] grayscale w-full h-full relative select-none" aria-hidden="true">
+      <img 
+        src="https://images.unsplash.com/photo-1514320291840-2e0a9bf2a9ae?q=80&w=2070&auto=format&fit=crop" 
+        alt="Consola analógica en el Estudio de Grabación" 
+        class="w-full h-full object-cover brightness-[0.7]"
+      />
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-20 h-20 bg-surface-0/70 backdrop-blur-sm border-2 border-surface-border rounded-full flex items-center justify-center text-surface-border">
+        <svg aria-hidden="true" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="ml-1">
+          <polygon points="5 3 19 12 5 21 5 3"></polygon>
+        </svg>
+      </div>
     </div>
+
+    <div title="Módulo en Calibración" class="absolute inset-0 bg-surface-0/10 backdrop-blur-[2px] flex flex-col items-center justify-center z-20 cursor-not-allowed transition-all duration-300 group-hover/lock:bg-surface-0/30">
+      <div class="flex items-center gap-3 bg-surface-100/90 px-6 py-3 rounded-full border border-surface-border/60 shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-all duration-300 group-hover/lock:border-gold-base/40 group-hover/lock:shadow-[0_0_25px_rgba(224,198,143,0.1)]">
+        <span class="w-2 h-2 rounded-full bg-gold-base animate-pulse"></span>
+        <span class="font-mono text-xs text-white uppercase tracking-[3px] font-bold mt-0.5">Módulo en Calibración</span>
+      </div>
+      <p class="text-surface-border text-xs font-mono uppercase tracking-[2px] mt-4 opacity-70">Video Reel próximamente</p>
+    </div>
+
   </div>
   
   <h1 class="font-rubik text-[clamp(2rem,5vw,4rem)] font-bold leading-[1.2] mb-12 max-w-[800px] text-white">
@@ -117,9 +130,9 @@
     <div class="grid md:grid-cols-2 gap-12">
       <div class="bg-surface-100/60 backdrop-blur-md border border-gold-base/20 rounded-[20px] p-12 relative overflow-hidden group hover:border-gold-base transition-colors">
         <div class="absolute top-0 left-0 w-1 h-full bg-gold-base transition-all duration-300 group-hover:w-full group-hover:opacity-5"></div>
-        <h3 class="font-rubik text-2xl font-semibold mb-4 text-white relative z-10">Transcripción SADAIC/DNDA</h3>
+        <h3 class="font-rubik text-2xl font-semibold mb-4 text-white relative z-10">Clases de Guitarra</h3>
         <p class="text-surface-border text-[1.05rem] mb-8 relative z-10">
-          Convierto tus audios o improvisaciones en partituras profesionales exactas. Ideal para el registro legal de derechos de autor.
+          Clases personalizadas de guitarra eléctrica y acústica. Aprende acordes, escalas, improvisación y técnicas avanzadas adaptadas a tu nivel.
         </p>
         <a href="#contacto" aria-label="Consultar tarifas para transcripción" class="inline-flex items-center gap-2 font-rubik text-gold-base font-semibold uppercase tracking-[1px] text-[0.9rem] relative z-10 hover:gap-4 transition-all focus:outline-none focus:ring-2 focus:ring-gold-base rounded">
           Consultar tarifas <span aria-hidden="true">→</span>
@@ -143,29 +156,40 @@
 <section class="py-24 bg-surface-0 border-y border-surface-border overflow-hidden relative">
   <h4 class="text-center font-rubik text-[1.2rem] uppercase tracking-[2px] text-surface-border mb-12">Artistas y Clientes</h4>
   
-  <div class="w-full overflow-hidden whitespace-nowrap relative" aria-hidden="true">
-    <div class="absolute top-0 left-0 w-[150px] h-full bg-gradient-to-r from-surface-0 to-transparent z-10"></div>
-    <div class="absolute top-0 right-0 w-[150px] h-full bg-gradient-to-l from-surface-0 to-transparent z-10"></div>
+  <div class="w-full overflow-hidden whitespace-nowrap relative group/lock">
     
-    <div class="inline-flex gap-16 pl-16 animate-marquee w-[200%]">
-      {#each [1, 2] as set}
-        <div class="flex flex-col items-center gap-4 group cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1493225457124-a1a2a5f5646f?w=200&h=200&fit=crop" class="w-[100px] h-[100px] rounded-full object-cover border-2 border-surface-border grayscale group-hover:grayscale-0 group-hover:border-gold-base group-hover:shadow-[0_0_15px_rgba(224,198,143,0.25)] transition-all duration-300 transform group-hover:scale-110" alt="Retrato del artista Lil Nova" />
-          <span class="font-rubik text-[0.9rem] font-semibold text-white">Lil Nova</span>
-        </div>
-        <div class="flex flex-col items-center gap-4 group cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1516280440502-61614f17849e?w=200&h=200&fit=crop" class="w-[100px] h-[100px] rounded-full object-cover border-2 border-surface-border grayscale group-hover:grayscale-0 group-hover:border-gold-base group-hover:shadow-[0_0_15px_rgba(224,198,143,0.25)] transition-all duration-300 transform group-hover:scale-110" alt="Retrato del artista J. Cruz" />
-          <span class="font-rubik text-[0.9rem] font-semibold text-white">J. Cruz</span>
-        </div>
-        <div class="flex flex-col items-center gap-4 group cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=200&h=200&fit=crop" class="w-[100px] h-[100px] rounded-full object-cover border-2 border-surface-border grayscale group-hover:grayscale-0 group-hover:border-gold-base group-hover:shadow-[0_0_15px_rgba(224,198,143,0.25)] transition-all duration-300 transform group-hover:scale-110" alt="Retrato del artista The Vibe" />
-          <span class="font-rubik text-[0.9rem] font-semibold text-white">The Vibe</span>
-        </div>
-        <div class="flex flex-col items-center gap-4 group cursor-pointer">
-          <img src="https://images.unsplash.com/photo-1508214751196-bfd1406eb34e?w=200&h=200&fit=crop" class="w-[100px] h-[100px] rounded-full object-cover border-2 border-surface-border grayscale group-hover:grayscale-0 group-hover:border-gold-base group-hover:shadow-[0_0_15px_rgba(224,198,143,0.25)] transition-all duration-300 transform group-hover:scale-110" alt="Retrato de la artista Elena Rose" />
-          <span class="font-rubik text-[0.9rem] font-semibold text-white">Elena Rose</span>
-        </div>
-      {/each}
+    <div class="pointer-events-none opacity-20 blur-[1px] grayscale select-none" aria-hidden="true">
+      <div class="absolute top-0 left-0 w-[150px] h-full bg-gradient-to-r from-surface-0 to-transparent z-10"></div>
+      <div class="absolute top-0 right-0 w-[150px] h-full bg-gradient-to-l from-surface-0 to-transparent z-10"></div>
+      
+      <div class="inline-flex gap-16 pl-16 animate-marquee w-[200%]">
+        {#each [1, 2] as set}
+          <div class="flex flex-col items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1493225457124-a1a2a5f5646f?w=200&h=200&fit=crop" class="w-[100px] h-[100px] rounded-full object-cover border-2 border-surface-border" alt="Retrato Lil Nova" />
+            <span class="font-rubik text-[0.9rem] font-semibold text-white">Lil Nova</span>
+          </div>
+          <div class="flex flex-col items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1516280440502-61614f17849e?w=200&h=200&fit=crop" class="w-[100px] h-[100px] rounded-full object-cover border-2 border-surface-border" alt="Retrato J. Cruz" />
+            <span class="font-rubik text-[0.9rem] font-semibold text-white">J. Cruz</span>
+          </div>
+          <div class="flex flex-col items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?w=200&h=200&fit=crop" class="w-[100px] h-[100px] rounded-full object-cover border-2 border-surface-border" alt="Retrato The Vibe" />
+            <span class="font-rubik text-[0.9rem] font-semibold text-white">The Vibe</span>
+          </div>
+          <div class="flex flex-col items-center gap-4">
+            <img src="https://images.unsplash.com/photo-1508214751196-bfd1406eb34e?w=200&h=200&fit=crop" class="w-[100px] h-[100px] rounded-full object-cover border-2 border-surface-border" alt="Retrato Elena Rose" />
+            <span class="font-rubik text-[0.9rem] font-semibold text-white">Elena Rose</span>
+          </div>
+        {/each}
+      </div>
     </div>
+
+    <div title="Módulo en Calibración" class="absolute inset-0 bg-surface-0/10 backdrop-blur-[2px] flex flex-col items-center justify-center z-20 cursor-not-allowed transition-all duration-300 group-hover/lock:bg-surface-0/30">
+      <div class="flex items-center gap-3 bg-surface-100/90 px-6 py-3 rounded-full border border-surface-border/60 shadow-[0_10px_30px_rgba(0,0,0,0.5)] transition-all duration-300 group-hover/lock:border-gold-base/40 group-hover/lock:shadow-[0_0_25px_rgba(224,198,143,0.1)]">
+        <span class="w-2 h-2 rounded-full bg-gold-base animate-pulse"></span>
+        <span class="font-mono text-xs text-white uppercase tracking-[3px] font-bold mt-0.5">Módulo en Calibración</span>
+      </div>
+    </div>
+
   </div>
 </section>

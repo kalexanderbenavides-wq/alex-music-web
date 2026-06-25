@@ -23,7 +23,7 @@
           <div class="w-12 h-12 rounded-full bg-surface-100 border border-surface-border flex items-center justify-center group-hover:border-neon-pink transition-colors" aria-hidden="true">
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-neon-pink"><rect x="2" y="4" width="20" height="16" rx="2" ry="2"></rect><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"></path></svg>
           </div>
-          hola@alexbenavides.com
+          alexbenavidesguit@gmail.com
         </a>
       </div>
     </div>
@@ -37,7 +37,7 @@
       <div class="space-y-6">
         <div>
           <label for="name" class="block text-[0.8rem] font-bold text-surface-border uppercase tracking-widest mb-2">Tu Nombre / Artista</label>
-          <input type="text" id="name" name="nombre" class="w-full bg-surface-0 border border-surface-border rounded-xl px-4 py-4 text-white focus:outline-none focus:border-neon-pink focus:shadow-[0_0_15px_rgba(255,73,122,0.15)] transition-all" placeholder="Ej: Duki..." required aria-required="true" />
+          <input type="text" id="name" name="nombre" class="w-full bg-surface-0 border border-surface-border rounded-xl px-4 py-4 text-white focus:outline-none focus:border-neon-pink focus:shadow-[0_0_15px_rgba(255,73,122,0.15)] transition-all" placeholder="Ej: Cory Wong..." required aria-required="true" />
         </div>
         
         <div>
@@ -52,7 +52,7 @@
         
         <button type="submit" class="w-full relative inline-flex items-center justify-center gap-4 px-8 py-5 font-rubik font-bold uppercase tracking-[3px] text-white transition-all duration-100 rounded-lg bg-gradient-to-br from-surface-300 to-surface-100 border-2 border-surface-border shadow-[0_4px_0_#111,0_8px_15px_rgba(0,0,0,0.4)] active:shadow-[0_0_0_#111] active:translate-y-1 hover:border-surface-200 cursor-pointer group mt-2 focus:outline-none focus:ring-2 focus:ring-danger-rec focus:ring-offset-2 focus:ring-offset-surface-0">
           <div class="w-4 h-4 rounded-full border-2 border-[#550000] bg-danger-rec shadow-[0_0_10px_#ff0000,inset_0_0_5px_#ffffff] group-hover:shadow-[0_0_15px_#ff2a2a,0_0_30px_#ff0000,inset_0_0_5px_#ffffff] transition-shadow duration-300" aria-hidden="true"></div>
-          <span class="mt-1">REC: Enviar Mensaje</span>
+          <span class="mt-1">Enviar Mensaje</span>
         </button>
       </div>
     </form>

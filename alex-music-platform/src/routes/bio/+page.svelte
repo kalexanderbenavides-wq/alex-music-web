@@ -31,20 +31,43 @@
     </div>
 
     <div class="flex flex-col sm:flex-row gap-6 border-t border-surface-border pt-12">
-      <a href="https://instagram.com/tu_usuario" target="_blank" class="flex items-center justify-between p-6 rounded-2xl bg-surface-100 border border-surface-border hover:border-gold-base transition-all group w-full focus:outline-none focus:ring-2 focus:ring-gold-base">
-        <span class="font-rubik font-bold text-white uppercase tracking-wider text-sm">Instagram</span>
-        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-surface-border group-hover:text-gold-base transition-colors"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-      </a>
       
-      <a href="https://youtube.com/tu_usuario" target="_blank" class="flex items-center justify-between p-6 rounded-2xl bg-surface-100 border border-surface-border hover:border-danger-rec transition-all group w-full focus:outline-none focus:ring-2 focus:ring-danger-rec">
-        <span class="font-rubik font-bold text-white uppercase tracking-wider text-sm">YouTube</span>
-        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-surface-border group-hover:text-danger-rec transition-colors"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-      </a>
+      <div class="relative w-full group/lock">
+        <div class="pointer-events-none opacity-25 blur-[0.5px] grayscale">
+          <div class="flex items-center justify-between p-6 rounded-2xl bg-surface-100 border border-surface-border w-full">
+            <span class="font-rubik font-bold text-white uppercase tracking-wider text-sm">Instagram</span>
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-surface-border"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </div>
+        </div>
+        <div title="En Calibración" class="absolute inset-0 bg-surface-100/10 backdrop-blur-[2px] flex items-center justify-center rounded-2xl border border-surface-border/50 z-10 cursor-not-allowed transition-all group-hover/lock:border-gold-base/50 group-hover/lock:bg-surface-100/30">
+          <span class="font-mono text-[0.65rem] text-gold-base uppercase tracking-[3px] font-bold">En Calibración</span>
+        </div>
+      </div>
+      
+      <div class="relative w-full group/lock">
+        <div class="pointer-events-none opacity-25 blur-[0.5px] grayscale">
+          <div class="flex items-center justify-between p-6 rounded-2xl bg-surface-100 border border-surface-border w-full">
+            <span class="font-rubik font-bold text-white uppercase tracking-wider text-sm">YouTube</span>
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-surface-border"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </div>
+        </div>
+        <div title="En Calibración" class="absolute inset-0 bg-surface-100/10 backdrop-blur-[2px] flex items-center justify-center rounded-2xl border border-surface-border/50 z-10 cursor-not-allowed transition-all group-hover/lock:border-danger-rec/50 group-hover/lock:bg-surface-100/30">
+          <span class="font-mono text-[0.65rem] text-danger-rec uppercase tracking-[3px] font-bold">En Calibración</span>
+        </div>
+      </div>
 
-      <a href="https://tiktok.com/@tu_usuario" target="_blank" class="flex items-center justify-between p-6 rounded-2xl bg-surface-100 border border-surface-border hover:border-neon-green transition-all group w-full focus:outline-none focus:ring-2 focus:ring-neon-green">
-        <span class="font-rubik font-bold text-white uppercase tracking-wider text-sm">TikTok</span>
-        <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-surface-border group-hover:text-neon-green transition-colors"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
-      </a>
+      <div class="relative w-full group/lock">
+        <div class="pointer-events-none opacity-25 blur-[0.5px] grayscale">
+          <div class="flex items-center justify-between p-6 rounded-2xl bg-surface-100 border border-surface-border w-full">
+            <span class="font-rubik font-bold text-white uppercase tracking-wider text-sm">TikTok</span>
+            <svg aria-hidden="true" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" class="text-surface-border"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg>
+          </div>
+        </div>
+        <div title="En Calibración" class="absolute inset-0 bg-surface-100/10 backdrop-blur-[2px] flex items-center justify-center rounded-2xl border border-surface-border/50 z-10 cursor-not-allowed transition-all group-hover/lock:border-neon-green/50 group-hover/lock:bg-surface-100/30">
+          <span class="font-mono text-[0.65rem] text-neon-green uppercase tracking-[3px] font-bold">En Calibración</span>
+        </div>
+      </div>
+
     </div>
 
   </div>
