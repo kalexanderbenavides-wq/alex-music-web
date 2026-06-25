@@ -62,7 +62,7 @@
     <span class="text-transparent bg-clip-text bg-gradient-to-r from-gold-base to-white">Nosotros lo materializamos.</span>
   </h1>
   
-  <RecButton text="Contactarme" href="#contacto" />
+  <RecButton text="Contactarme" href="/contacto" />
 </section>
 
 <div id="beats" class="relative w-full flex justify-center mt-20 mb-28 px-4">
@@ -134,7 +134,7 @@
         <p class="text-surface-border text-[1.05rem] mb-8 relative z-10">
           Clases personalizadas de guitarra eléctrica y acústica. Aprende acordes, escalas, improvisación y técnicas avanzadas adaptadas a tu nivel.
         </p>
-        <a href="#contacto" aria-label="Consultar tarifas para transcripción" class="inline-flex items-center gap-2 font-rubik text-gold-base font-semibold uppercase tracking-[1px] text-[0.9rem] relative z-10 hover:gap-4 transition-all focus:outline-none focus:ring-2 focus:ring-gold-base rounded">
+        <a href="/contacto" aria-label="Consultar tarifas para transcripción" class="inline-flex items-center gap-2 font-rubik text-gold-base font-semibold uppercase tracking-[1px] text-[0.9rem] relative z-10 hover:gap-4 transition-all focus:outline-none focus:ring-2 focus:ring-gold-base rounded">
           Consultar tarifas <span aria-hidden="true">→</span>
         </a>
       </div>
@@ -145,7 +145,7 @@
         <p class="text-surface-border text-[1.05rem] mb-8 relative z-10">
           Aprende con un enfoque práctico. Teoría musical aplicada, grabación en home studio, síntesis y mezcla de voces.
         </p>
-        <a href="#contacto" aria-label="Agendar clase de producción en Ableton" class="inline-flex items-center gap-2 font-rubik text-gold-base font-semibold uppercase tracking-[1px] text-[0.9rem] relative z-10 hover:gap-4 transition-all focus:outline-none focus:ring-2 focus:ring-gold-base rounded">
+        <a href="/contacto" aria-label="Agendar clase de producción en Ableton" class="inline-flex items-center gap-2 font-rubik text-gold-base font-semibold uppercase tracking-[1px] text-[0.9rem] relative z-10 hover:gap-4 transition-all focus:outline-none focus:ring-2 focus:ring-gold-base rounded">
           Agendar clase <span aria-hidden="true">→</span>
         </a>
       </div>
